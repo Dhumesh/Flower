@@ -101,9 +101,24 @@
       }
     </script>
 <style>
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.open {
+            display: block;
+        }
+        @media (min-width: 768px) {
+            .mobile-menu {
+                display: none !important;
+            }
         }
         .journal-border {
             border-bottom: 1px solid rgba(142, 112, 107, 0.2);
@@ -156,6 +171,35 @@
                 animation: none;
             }
         }
+        @media (max-width: 767px) {
+            nav {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            nav .text-4xl {
+                font-size: 1.875rem;
+            }
+            .mobile-menu a {
+                min-height: 44px;
+            }
+            main {
+                padding-top: 2rem !important;
+            }
+            section {
+                margin-bottom: 60px !important;
+            }
+            .text-display-hero-mobile {
+                font-size: 38px !important;
+                line-height: 1.15 !important;
+            }
+            .text-headline-lg {
+                font-size: 32px !important;
+                line-height: 1.2 !important;
+            }
+            .p-gutter {
+                padding: 1.25rem !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -183,12 +227,18 @@
 <button class="hover:scale-110 transition-transform" aria-label="Shopping bag">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
-<button class="md:hidden hover:scale-110 transition-transform" aria-label="Menu">
+<button class="mobile-menu-toggle md:hidden hover:scale-110 transition-transform" type="button" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
 </div>
 </div>
 </nav>
+<div id="mobileMenu" class="mobile-menu md:hidden border-t border-surface-variant bg-surface px-4 py-3 shadow-sm">
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-gray-600" href="home.html">Home</a>
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-gray-600" href="shop.html">Shop</a>
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-primary" href="blog.html">Blog</a>
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-gray-600" href="contact.html">Contact</a>
+</div>
 </header>
 <main class="max-w-container-max mx-auto px-gutter py-stack-lg">
 <!-- Journal Header -->
@@ -461,6 +511,24 @@ Back to Blogs
             element.classList.add(className);
         }
 
+        function initMobileMenu() {
+            const button = document.querySelector('.mobile-menu-toggle');
+            const menu = document.getElementById('mobileMenu');
+            if (!button || !menu) return;
+
+            button.addEventListener('click', () => {
+                const isOpen = menu.classList.toggle('open');
+                button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.remove('open');
+                    button.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
         function initScrollAnimations() {
             const targets = document.querySelectorAll('main section, main article, aside > div, footer > div');
             targets.forEach((target, index) => {
@@ -691,6 +759,7 @@ Back to Blogs
             control.addEventListener('click', () => animateElement(control, 'motion-click'));
         });
 
+        initMobileMenu();
         renderBlogPage(0);
         initScrollAnimations();
     </script>

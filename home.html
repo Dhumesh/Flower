@@ -38,7 +38,11 @@
   </script>
 <style data-purpose="custom-typography">
     body { font-family: 'Inter', sans-serif; }
+    html, body { max-width: 100%; overflow-x: hidden; }
     h1, h2, h3, h4, .font-serif { font-family: 'Libre Caslon Text', serif; }
+    .mobile-menu { display: none; }
+    .mobile-menu.open { display: block; }
+    @media (min-width: 768px) { .mobile-menu { display: none !important; } }
     .nav-link { font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; }
     .product-card { display: flex; flex-direction: column; height: 100%; }
     .product-image-frame {
@@ -90,6 +94,26 @@
         animation: none;
       }
     }
+    @media (max-width: 767px) {
+      nav { padding-left: 1rem !important; padding-right: 1rem !important; }
+      nav .text-4xl { font-size: 1.875rem; }
+      main section { scroll-margin-top: 86px; }
+      .mobile-menu a { min-height: 44px; }
+      section { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+      section.min-h-\[600px\] { min-height: auto; padding-top: 2rem !important; padding-bottom: 5rem !important; }
+      #heroSlide { padding-left: 1rem !important; padding-right: 1rem !important; gap: 2rem; }
+      #heroCopy { padding-top: 1.5rem !important; padding-bottom: 0 !important; }
+      #heroTitle { font-size: 2.35rem !important; line-height: 1.12 !important; }
+      #heroButton { width: 100%; text-align: center; padding-left: 1rem !important; padding-right: 1rem !important; }
+      #prevHero, #nextHero { top: auto; bottom: 1rem; transform: none; padding: 0.75rem; }
+      #prevHero { left: 1rem; }
+      #nextHero { right: 1rem; }
+      #prevHero svg, #nextHero svg { width: 1.5rem; height: 1.5rem; }
+      #heroDots { bottom: 1.65rem; }
+      #featuredGrid { grid-template-columns: 1fr; }
+      .featured-tab { font-size: 0.68rem; }
+      footer { padding-bottom: 2rem; }
+    }
   </style>
 </head>
 <body class="bg-surface text-on-background">
@@ -123,12 +147,18 @@
 <button class="hover:scale-110 transition-transform" aria-label="Shopping bag">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
-<button class="md:hidden hover:scale-110 transition-transform" aria-label="Menu">
+<button class="mobile-menu-toggle md:hidden hover:scale-110 transition-transform" type="button" aria-label="Menu" aria-controls="mobileMenu" aria-expanded="false">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
 </div>
 </div>
 </nav>
+<div id="mobileMenu" class="mobile-menu md:hidden border-t border-surface-variant bg-surface px-4 py-3 shadow-sm">
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-primary" href="home.html">Home</a>
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-gray-600" href="shop.html">Shop</a>
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-gray-600" href="blog.html">Blog</a>
+<a class="block py-3 text-sm font-semibold uppercase tracking-widest text-gray-600" href="contact.html">Contact</a>
+</div>
 </header>
 <!-- END: TopNavBar -->
 <main>
@@ -548,6 +578,24 @@
     element.classList.add(className);
   }
 
+  function initMobileMenu() {
+    const button = document.querySelector('.mobile-menu-toggle');
+    const menu = document.getElementById('mobileMenu');
+    if (!button || !menu) return;
+
+    button.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   function initScrollAnimations() {
     const targets = document.querySelectorAll('main section, main article, footer > div');
     targets.forEach((target, index) => {
@@ -740,6 +788,7 @@
     control.addEventListener('click', () => animateElement(control, 'motion-click'));
   });
 
+  initMobileMenu();
   initScrollAnimations();
 </script>
 </body></html>
