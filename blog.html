@@ -120,6 +120,42 @@
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #b5251c;
         }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 700ms ease, transform 700ms ease;
+        }
+        .reveal-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .content-swap {
+            animation: contentSwap 420ms ease;
+        }
+        .motion-click {
+            animation: motionClick 220ms ease;
+        }
+        @keyframes contentSwap {
+            from { opacity: 0; transform: translateY(14px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes motionClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.88); }
+            100% { transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll,
+            .reveal-on-scroll.in-view {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .content-swap,
+            .motion-click {
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -418,6 +454,37 @@ Back to Blogs
 </footer>
 <!-- END: Footer -->
 <script>
+        function animateElement(element, className = 'content-swap') {
+            if (!element) return;
+            element.classList.remove(className);
+            void element.offsetWidth;
+            element.classList.add(className);
+        }
+
+        function initScrollAnimations() {
+            const targets = document.querySelectorAll('main section, main article, aside > div, footer > div');
+            targets.forEach((target, index) => {
+                target.classList.add('reveal-on-scroll');
+                target.style.transitionDelay = `${Math.min((index % 6) * 60, 240)}ms`;
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                targets.forEach(target => target.classList.add('in-view'));
+                return;
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
+            targets.forEach(target => observer.observe(target));
+        }
+
         // Micro-interactions for scrolling header
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
@@ -558,6 +625,7 @@ Back to Blogs
             blogList.classList.add('hidden');
             blogPagination.classList.add('hidden');
             blogDetail.classList.remove('hidden');
+            animateElement(blogDetail);
             blogDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -576,6 +644,7 @@ Back to Blogs
             blogPageOrders[currentBlogPage].forEach(cardIndex => {
                 blogList.appendChild(blogCards[cardIndex]);
             });
+            animateElement(blogList);
 
             blogPageButtons.forEach(button => {
                 const isActive = Number(button.dataset.page) === currentBlogPage;
@@ -590,17 +659,20 @@ Back to Blogs
 
         blogPageButtons.forEach(button => {
             button.addEventListener('click', () => {
+                animateElement(button, 'motion-click');
                 renderBlogPage(Number(button.dataset.page));
                 blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
         prevBlogPage.addEventListener('click', () => {
+            animateElement(prevBlogPage, 'motion-click');
             renderBlogPage(currentBlogPage - 1);
             blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
         nextBlogPage.addEventListener('click', () => {
+            animateElement(nextBlogPage, 'motion-click');
             renderBlogPage(currentBlogPage + 1);
             blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
@@ -609,11 +681,17 @@ Back to Blogs
             blogDetail.classList.add('hidden');
             blogList.classList.remove('hidden');
             blogPagination.classList.remove('hidden');
+            animateElement(blogList);
             blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
         featuredReadMore.addEventListener('click', () => showBlogPost('secret-language-lilies'));
 
+        document.querySelectorAll('button, a').forEach(control => {
+            control.addEventListener('click', () => animateElement(control, 'motion-click'));
+        });
+
         renderBlogPage(0);
+        initScrollAnimations();
     </script>
 </body></html>

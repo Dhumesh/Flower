@@ -115,6 +115,42 @@
         .accordion-item.active .icon-rotate {
             transform: rotate(45deg);
         }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 700ms ease, transform 700ms ease;
+        }
+        .reveal-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .content-swap {
+            animation: contentSwap 420ms ease;
+        }
+        .motion-click {
+            animation: motionClick 220ms ease;
+        }
+        @keyframes contentSwap {
+            from { opacity: 0; transform: translateY(14px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes motionClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.88); }
+            100% { transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll,
+            .reveal-on-scroll.in-view {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .content-swap,
+            .motion-click {
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md">
@@ -336,6 +372,37 @@
 </footer>
 <!-- END: Footer -->
 <script>
+        function animateElement(element, className = 'content-swap') {
+            if (!element) return;
+            element.classList.remove(className);
+            void element.offsetWidth;
+            element.classList.add(className);
+        }
+
+        function initScrollAnimations() {
+            const targets = document.querySelectorAll('main section, main article, main > div, footer > div');
+            targets.forEach((target, index) => {
+                target.classList.add('reveal-on-scroll');
+                target.style.transitionDelay = `${Math.min((index % 6) * 60, 240)}ms`;
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                targets.forEach(target => target.classList.add('in-view'));
+                return;
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
+            targets.forEach(target => observer.observe(target));
+        }
+
         function toggleAccordion(element) {
             // Close all other accordions
             const items = document.querySelectorAll('.accordion-item');
@@ -346,12 +413,17 @@
             });
             // Toggle current
             element.classList.toggle('active');
+            animateElement(element);
         }
 
         // Initialize first FAQ as open
         window.addEventListener('DOMContentLoaded', () => {
             const firstFaq = document.querySelector('.accordion-item');
             if (firstFaq) toggleAccordion(firstFaq);
+            document.querySelectorAll('button, a, .accordion-item').forEach(control => {
+                control.addEventListener('click', () => animateElement(control, 'motion-click'));
+            });
+            initScrollAnimations();
         });
     </script>
 </body></html>

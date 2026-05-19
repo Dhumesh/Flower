@@ -129,6 +129,42 @@
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #e2e2e2;
         }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 700ms ease, transform 700ms ease;
+        }
+        .reveal-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .content-swap {
+            animation: contentSwap 420ms ease;
+        }
+        .motion-click {
+            animation: motionClick 220ms ease;
+        }
+        @keyframes contentSwap {
+            from { opacity: 0; transform: translateY(14px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes motionClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.88); }
+            100% { transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll,
+            .reveal-on-scroll.in-view {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .content-swap,
+            .motion-click {
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body class="font-body-md text-body-md">
@@ -447,6 +483,37 @@
 </button>
 </div>
 <script>
+        function animateElement(element, className = 'content-swap') {
+            if (!element) return;
+            element.classList.remove(className);
+            void element.offsetWidth;
+            element.classList.add(className);
+        }
+
+        function initScrollAnimations() {
+            const targets = document.querySelectorAll('main section, main article, aside > div, footer > div');
+            targets.forEach((target, index) => {
+                target.classList.add('reveal-on-scroll');
+                target.style.transitionDelay = `${Math.min((index % 6) * 60, 240)}ms`;
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                targets.forEach(target => target.classList.add('in-view'));
+                return;
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
+            targets.forEach(target => observer.observe(target));
+        }
+
         const productGrid = document.getElementById('productGrid');
         const noResults = document.getElementById('noResults');
         const searchInput = document.getElementById('shopSearch');
@@ -543,6 +610,7 @@
             priceValue.textContent = `$${maxPrice}`;
             noResults.classList.toggle('hidden', sortedMatches.length > 0);
             setActivePageButton(totalPages);
+            animateElement(productGrid);
         }
 
         [searchInput, sortBy, priceRange, ...typeFilters].forEach(control => {
@@ -559,21 +627,29 @@
         pageButtons.forEach(button => {
             button.addEventListener('click', () => {
                 if (button.disabled) return;
+                animateElement(button, 'motion-click');
                 currentPage = Number(button.dataset.page);
                 applyFilters();
             });
         });
 
         prevPage.addEventListener('click', () => {
+            animateElement(prevPage, 'motion-click');
             currentPage = Math.max(1, currentPage - 1);
             applyFilters();
         });
 
         nextPage.addEventListener('click', () => {
+            animateElement(nextPage, 'motion-click');
             currentPage += 1;
             applyFilters();
         });
 
+        document.querySelectorAll('button, a').forEach(control => {
+            control.addEventListener('click', () => animateElement(control, 'motion-click'));
+        });
+
         applyFilters();
+        initScrollAnimations();
     </script>
 </body></html>

@@ -54,6 +54,42 @@
       height: 100%;
       object-fit: cover;
     }
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+    .reveal-on-scroll.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .content-swap {
+      animation: contentSwap 420ms ease;
+    }
+    .motion-click {
+      animation: motionClick 220ms ease;
+    }
+    @keyframes contentSwap {
+      from { opacity: 0; transform: translateY(14px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes motionClick {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.88); }
+      100% { transform: scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-on-scroll,
+      .reveal-on-scroll.in-view {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .content-swap,
+      .motion-click {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body class="bg-surface text-on-background">
@@ -98,24 +134,25 @@
 <main>
 <!-- BEGIN: Hero -->
 <section class="relative bg-[#fdf2f0] overflow-hidden min-h-[600px] flex items-center">
-<div class="max-w-container-max mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
-<div class="z-10 py-20">
-<span class="text-xs font-bold tracking-widest text-gray-500 block mb-4 border-l-2 border-primary pl-4 uppercase">20% Off For New Members</span>
-<h1 class="text-5xl md:text-7xl font-serif text-on-background mb-6 leading-tight">HAPPY MOTHER’S DAY!</h1>
-<p class="text-lg text-gray-600 mb-10">Bouquets your mom will love!</p>
-<a class="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold text-xs tracking-widest hover:bg-black transition-colors duration-300" href="shop.html">START SHOPPING</a>
+<div id="heroSlide" class="max-w-container-max mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
+<div id="heroCopy" class="z-10 py-20">
+<span id="heroEyebrow" class="text-xs font-bold tracking-widest text-gray-500 block mb-4 border-l-2 border-primary pl-4 uppercase">20% Off For New Members</span>
+<h1 id="heroTitle" class="text-5xl md:text-7xl font-serif text-on-background mb-6 leading-tight">HAPPY MOTHER'S DAY!</h1>
+<p id="heroSubtitle" class="text-lg text-gray-600 mb-10">Bouquets your mom will love!</p>
+<a id="heroButton" class="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold text-xs tracking-widest hover:bg-black transition-colors duration-300" href="shop.html">START SHOPPING</a>
 </div>
 <div class="relative">
-<img alt="Mother's Day Flowers" class="w-full h-auto object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ1xHPbymbfa1bKKd3ETViu5N75PzZI8sk5PolhpdaIq8dQ1v-lmYFSaaNE8bQtDw-JlNa_5rkwMjW8IAF_lF6XiIk-MhZ6-pnatLm_oi60W8VwF5Rl4sJMmb4SrL3HnzHWe8WBWw_vAmMso1wp9BjzRk7-0XMSdc4RCtLh48QxgG3lXpmLWmemBDQzraOcOM1Ta7h7pxypGPagQ4E9V_K4S1rhgHazJE5tcLMj6c4mVyBik7ZO3BSbDULs8Br-pgjkOqHlLUzWxQ"/>
+<img id="heroImage" alt="Mother's Day Flowers" class="w-full aspect-[4/3] object-cover rounded-lg shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ1xHPbymbfa1bKKd3ETViu5N75PzZI8sk5PolhpdaIq8dQ1v-lmYFSaaNE8bQtDw-JlNa_5rkwMjW8IAF_lF6XiIk-MhZ6-pnatLm_oi60W8VwF5Rl4sJMmb4SrL3HnzHWe8WBWw_vAmMso1wp9BjzRk7-0XMSdc4RCtLh48QxgG3lXpmLWmemBDQzraOcOM1Ta7h7pxypGPagQ4E9V_K4S1rhgHazJE5tcLMj6c4mVyBik7ZO3BSbDULs8Br-pgjkOqHlLUzWxQ"/>
 </div>
 </div>
 <!-- Carousel Controls -->
-<button class="absolute left-4 top-1/2 -translate-y-1/2 p-4 text-gray-400 hover:text-primary">
+<button id="prevHero" class="absolute left-4 top-1/2 -translate-y-1/2 p-4 text-gray-400 hover:text-primary" type="button" aria-label="Previous banner">
 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
-<button class="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-gray-400 hover:text-primary">
+<button id="nextHero" class="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-gray-400 hover:text-primary" type="button" aria-label="Next banner">
 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
+<div id="heroDots" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3"></div>
 </section>
 <!-- END: Hero -->
 <!-- BEGIN: InfoBanner -->
@@ -504,6 +541,142 @@
 </footer>
 <!-- END: Footer -->
 <script>
+  function animateElement(element, className = 'content-swap') {
+    if (!element) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+  }
+
+  function initScrollAnimations() {
+    const targets = document.querySelectorAll('main section, main article, footer > div');
+    targets.forEach((target, index) => {
+      target.classList.add('reveal-on-scroll');
+      target.style.transitionDelay = `${Math.min((index % 6) * 60, 240)}ms`;
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(target => target.classList.add('in-view'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
+    targets.forEach(target => observer.observe(target));
+  }
+
+  const heroSlides = [
+    {
+      eyebrow: '20% Off For New Members',
+      title: "HAPPY MOTHER'S DAY!",
+      subtitle: 'Bouquets your mom will love, designed with fresh seasonal blooms.',
+      button: 'START SHOPPING',
+      href: 'shop.html',
+      alt: "Mother's Day Flowers",
+      bg: '#fdf2f0',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAJ1xHPbymbfa1bKKd3ETViu5N75PzZI8sk5PolhpdaIq8dQ1v-lmYFSaaNE8bQtDw-JlNa_5rkwMjW8IAF_lF6XiIk-MhZ6-pnatLm_oi60W8VwF5Rl4sJMmb4SrL3HnzHWe8WBWw_vAmMso1wp9BjzRk7-0XMSdc4RCtLh48QxgG3lXpmLWmemBDQzraOcOM1Ta7h7pxypGPagQ4E9V_K4S1rhgHazJE5tcLMj6c4mVyBik7ZO3BSbDULs8Br-pgjkOqHlLUzWxQ'
+    },
+    {
+      eyebrow: 'Weekend Special - Save 30%',
+      title: 'PREMIUM ROSE COLLECTION',
+      subtitle: 'Elegant red and blush rose arrangements for anniversaries, dates, and grand gestures.',
+      button: 'SHOP ROSES',
+      href: 'shop.html',
+      alt: 'Premium rose bouquet offer',
+      bg: '#fff5f5',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBjHwh7n07YFnCMLstCtQxayJuaUHCuQFnt7R1wPk-aMRBo3xRIvZR5JQghzl7FJwVwh3Jb1KYumHjK3ZPZRUdZ64Ap874YJtuFO6-4BdszPhJ4Op8E-GdC3D2TqdDMmvGRygkJyDHNCcPakfmdQBTIbSZMFDI13FhN_ICfSWC7f2vQmziwGQPA4_3FKfDnkR_rJIGsUwcPMNw_2JhdXYUxgrHdkLT6mEWR8ouk07uJ85eEpF8ccUyxUgx1WF6ghnhAOpfs_ahUKZk'
+    },
+    {
+      eyebrow: 'Same-Day Delivery Available',
+      title: 'BIRTHDAY BLOOMS FROM $38',
+      subtitle: 'Bright, joyful bouquets packed beautifully and delivered right on time.',
+      button: 'SEND A GIFT',
+      href: 'shop.html',
+      alt: 'Birthday flower delivery offer',
+      bg: '#f7fbf7',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBNxmcWiC9rrIUVbkx4USstuBhIKZdAyNDjKZ9YP21aBZVij1aA5zRvnhL6LvfzHuJms4nLl9so03ms9VHVmeZg8pzzUIoOzgd-RsitpzoBMZuzc2KZKPX967HlVY5l_o8dpedvgHzbNKaEWuufmjEoi4Qu26EqXo8ddyrjW7S9GOIaUErhMVRaPZOa1Gkk77tcXO_ZhUZXb0owwi-M6gF8bvXSJYkWtRJD_Xy_iPMzVPtNt_In49hiWbfaxW25qCvgXcGhISHM000'
+    },
+    {
+      eyebrow: 'Luxury Wrapped Bouquets',
+      title: 'GIFT SETS UP TO 25% OFF',
+      subtitle: 'Hand-tied flowers with refined wrapping, perfect for thoughtful surprises.',
+      button: 'EXPLORE GIFTS',
+      href: 'shop.html',
+      alt: 'Luxury wrapped bouquet offer',
+      bg: '#fffaf2',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDx0PVAU2Rs7ogXWkvkgEFPDzFzALhv5MrIe2Nd6I8ecNriKjetlUpnVcMzvUStcAXP8-PMjfNq3ksV2JjHv1VeSuVTVf_EaM07SMTqNpKYLG4HHQXQ95HaZ11xIeI8UAGVjsMlBPF2U-h9rI8IYmHgSprroE-CdqwGK47Asm04v09VR8NX64lv6efIBMzfaeYlCAC2zBH_8Gj2hbyM9UPjQOTqFYtGnuB834JmeXk3RTvLZAD-zs7uxsXxs0fKoSpLu0a646IXNUI'
+    }
+  ];
+
+  const heroSection = document.getElementById('heroSlide').closest('section');
+  const heroCopy = document.getElementById('heroCopy');
+  const heroEyebrow = document.getElementById('heroEyebrow');
+  const heroTitle = document.getElementById('heroTitle');
+  const heroSubtitle = document.getElementById('heroSubtitle');
+  const heroButton = document.getElementById('heroButton');
+  const heroImage = document.getElementById('heroImage');
+  const prevHero = document.getElementById('prevHero');
+  const nextHero = document.getElementById('nextHero');
+  const heroDots = document.getElementById('heroDots');
+  let currentHeroSlide = 0;
+
+  function renderHeroDots() {
+    heroDots.innerHTML = '';
+    heroSlides.forEach((slide, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'h-2.5 rounded-full transition-all duration-300';
+      dot.setAttribute('aria-label', `Show banner ${index + 1}`);
+      dot.addEventListener('click', () => showHeroSlide(index));
+      heroDots.appendChild(dot);
+    });
+  }
+
+  function showHeroSlide(index) {
+    currentHeroSlide = (index + heroSlides.length) % heroSlides.length;
+    const slide = heroSlides[currentHeroSlide];
+    heroEyebrow.textContent = slide.eyebrow;
+    heroTitle.textContent = slide.title;
+    heroSubtitle.textContent = slide.subtitle;
+    heroButton.textContent = slide.button;
+    heroButton.href = slide.href;
+    heroImage.src = slide.image;
+    heroImage.alt = slide.alt;
+    heroSection.style.backgroundColor = slide.bg;
+
+    Array.from(heroDots.children).forEach((dot, dotIndex) => {
+      const active = dotIndex === currentHeroSlide;
+      dot.classList.toggle('w-8', active);
+      dot.classList.toggle('w-2.5', !active);
+      dot.classList.toggle('bg-primary', active);
+      dot.classList.toggle('bg-gray-300', !active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+
+    animateElement(heroCopy);
+    animateElement(heroImage);
+  }
+
+  renderHeroDots();
+  showHeroSlide(0);
+
+  prevHero.addEventListener('click', () => {
+    animateElement(prevHero, 'motion-click');
+    showHeroSlide(currentHeroSlide - 1);
+  });
+
+  nextHero.addEventListener('click', () => {
+    animateElement(nextHero, 'motion-click');
+    showHeroSlide(currentHeroSlide + 1);
+  });
+
   const reviews = [
     'Beautiful flowers and fast delivery. The bouquet looked exactly like the pictures on the website.',
     'Very good customer service. The flowers were fresh and lasted for many days.',
@@ -520,9 +693,22 @@
   function showReview(index) {
     currentReview = (index + reviews.length) % reviews.length;
     reviewText.textContent = `“${reviews[currentReview]}”`;
+    animateElement(reviewText);
   }
 
-  prevReview.addEventListener('click', () => showReview(currentReview - 1));
-  nextReview.addEventListener('click', () => showReview(currentReview + 1));
+  prevReview.addEventListener('click', () => {
+    animateElement(prevReview, 'motion-click');
+    showReview(currentReview - 1);
+  });
+  nextReview.addEventListener('click', () => {
+    animateElement(nextReview, 'motion-click');
+    showReview(currentReview + 1);
+  });
+
+  document.querySelectorAll('button, a').forEach(control => {
+    control.addEventListener('click', () => animateElement(control, 'motion-click'));
+  });
+
+  initScrollAnimations();
 </script>
 </body></html>
