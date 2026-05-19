@@ -299,12 +299,12 @@
 <h2 class="text-4xl font-serif mb-4">Featured Items</h2>
 <p class="text-gray-500 max-w-2xl mx-auto text-sm italic mb-8">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.</p>
 <div class="flex justify-center gap-8 border-b border-gray-100 pb-4">
-<button class="text-primary font-bold text-xs tracking-widest uppercase border-b-2 border-primary pb-4">NEW</button>
-<button class="text-gray-400 hover:text-primary font-bold text-xs tracking-widest uppercase pb-4">FEATURED</button>
-<button class="text-gray-400 hover:text-primary font-bold text-xs tracking-widest uppercase pb-4">BEST SELLERS</button>
+<button class="featured-tab text-primary font-bold text-xs tracking-widest uppercase border-b-2 border-primary pb-4" type="button" data-tab="new">NEW</button>
+<button class="featured-tab text-gray-400 hover:text-primary font-bold text-xs tracking-widest uppercase pb-4" type="button" data-tab="featured">FEATURED</button>
+<button class="featured-tab text-gray-400 hover:text-primary font-bold text-xs tracking-widest uppercase pb-4" type="button" data-tab="best">BEST SELLERS</button>
 </div>
 </div>
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<div id="featuredGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-8">
 <!-- Reusing product structure for items 1-8 -->
 <div class="product-card text-center group">
 <div class="product-image-frame relative mb-4"><span class="absolute top-4 left-4 bg-gray-800 text-white text-[10px] px-2 py-1 z-10">-34%</span><img alt="Lily Majesty Palm" src="images/lily.png"/></div>
@@ -676,6 +676,37 @@
     animateElement(nextHero, 'motion-click');
     showHeroSlide(currentHeroSlide + 1);
   });
+
+  const featuredGrid = document.getElementById('featuredGrid');
+  const featuredTabs = Array.from(document.querySelectorAll('.featured-tab'));
+  const featuredCards = Array.from(document.querySelectorAll('#featuredGrid .product-card'));
+  const featuredOrders = {
+    new: [0, 1, 2, 3, 4, 5, 6, 7],
+    featured: [3, 6, 1, 4, 7, 0, 5, 2],
+    best: [7, 2, 5, 0, 6, 3, 1, 4]
+  };
+
+  function showFeaturedProducts(tabName) {
+    const order = featuredOrders[tabName] || featuredOrders.new;
+    order.forEach(cardIndex => featuredGrid.appendChild(featuredCards[cardIndex]));
+
+    featuredTabs.forEach(tab => {
+      const active = tab.dataset.tab === tabName;
+      tab.classList.toggle('text-primary', active);
+      tab.classList.toggle('border-b-2', active);
+      tab.classList.toggle('border-primary', active);
+      tab.classList.toggle('text-gray-400', !active);
+      tab.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    animateElement(featuredGrid);
+  }
+
+  featuredTabs.forEach(tab => {
+    tab.addEventListener('click', () => showFeaturedProducts(tab.dataset.tab));
+  });
+
+  showFeaturedProducts('new');
 
   const reviews = [
     'Beautiful flowers and fast delivery. The bouquet looked exactly like the pictures on the website.',
