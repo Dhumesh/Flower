@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Work+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "background": "#f9f9f9",
+                    "primary-container": "#ff5b4a",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f3f3f3",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-tertiary-fixed-variant": "#464747",
+                    "on-primary-fixed": "#410001",
+                    "inverse-primary": "#ffb4a9",
+                    "on-surface-variant": "#5a403d",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container-highest": "#e2e2e2",
+                    "outline-variant": "#e3beb9",
+                    "tertiary-fixed-dim": "#c7c6c6",
+                    "on-tertiary-container": "#2c2c2c",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "outline": "#8e706b",
+                    "on-primary-container": "#610001",
+                    "primary-fixed-dim": "#ffb4a9",
+                    "inverse-surface": "#2f3131",
+                    "secondary": "#5f5e5e",
+                    "secondary-container": "#e2dfde",
+                    "on-secondary-container": "#636262",
+                    "surface-container": "#eeeeee",
+                    "tertiary-container": "#949393",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#b5251c",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#5e5e5e",
+                    "surface-container-high": "#e8e8e8",
+                    "on-background": "#1a1c1c",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface": "#f9f9f9",
+                    "surface-variant": "#e2e2e2",
+                    "primary": "#b5251c",
+                    "surface-bright": "#f9f9f9",
+                    "primary-fixed": "#ffdad5",
+                    "on-primary-fixed-variant": "#920506",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-dim": "#dadada"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "stack-sm": "8px",
+                    "gutter": "30px",
+                    "section-padding-mobile": "60px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "section-padding-desktop": "100px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Work Sans"],
+                    "headline-md": ["Libre Caslon Text"],
+                    "display-hero": ["Libre Caslon Text"],
+                    "headline-sm": ["Work Sans"],
+                    "body-lg": ["Work Sans"],
+                    "display-hero-mobile": ["Libre Caslon Text"],
+                    "headline-lg": ["Libre Caslon Text"],
+                    "body-md": ["Work Sans"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "display-hero": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "headline-sm": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-hero-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "headline-lg": ["42px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .journal-border {
+            border-bottom: 1px solid rgba(142, 112, 107, 0.2);
+        }
+        .hero-zoom:hover img {
+            transform: scale(1.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #b5251c;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-surface sticky top-0 z-50 border-b border-surface-variant transition-all duration-300">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-4xl font-serif text-primary" href="home.html">Kngu</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-xs font-semibold uppercase tracking-widest text-gray-600 hover:text-primary transition-colors duration-300 active:scale-95" href="home.html">Home</a>
+<a class="text-xs font-semibold uppercase tracking-widest text-gray-600 hover:text-primary transition-colors duration-300 active:scale-95" href="shop.html">Shop</a>
+<a class="text-xs font-semibold uppercase tracking-widest text-primary border-b-2 border-primary pb-1 transition-all active:scale-95" href="blog.html">Blog</a>
+<a class="text-xs font-semibold uppercase tracking-widest text-gray-600 hover:text-primary transition-colors duration-300 active:scale-95" href="contact.html">Contact</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center border-b border-gray-300 px-2 py-1">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-40 placeholder:text-gray-400" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<button class="hover:scale-110 transition-transform" aria-label="Account">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="hover:scale-110 transition-transform" aria-label="Shopping bag">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="md:hidden hover:scale-110 transition-transform" aria-label="Menu">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-gutter py-stack-lg">
+<!-- Journal Header -->
+<div class="text-center mb-section-padding-mobile md:mb-section-padding-desktop">
+<span class="font-label-caps text-label-caps text-primary mb-4 block">Botanical Journal</span>
+<h1 class="font-display-hero text-display-hero-mobile md:text-display-hero italic">Reflections on Bloom &amp; Earth</h1>
+</div>
+<!-- Featured Post Section -->
+<section class="mb-section-padding-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-8 overflow-hidden hero-zoom group cursor-pointer">
+<img id="featuredImage" alt="White Lilies" class="w-full aspect-[16/9] object-cover transition-transform duration-700 ease-in-out" data-alt="A cinematic, high-key editorial photograph of a cluster of pristine white lilies in a crystal vase. The lighting is soft and diffused, highlighting the delicate textures and organic curves of the petals against a minimalist beige background. The composition is airy and elegant, reflecting a high-end botanical shop's aesthetic with a warm, serene mood and clean lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxr0Pywo0xIT4jK4RZX0viPW_pt-iK5Higvcy2DDmq0C8YFNuyQ-yMyHsIRSG8GVNm3eJxwj-heiuiCnlMZxpR9FFT18mMDQlFW-MfOf8P_QQfo6EI4ZUwUNeOx8T9uD0PB5jfGAkHN_qUOhJ_nS0OsxK4G1h15oxokSmDz2xgGqwwqdXp5U6QHrx1Lq_J4cowu_gRNtgWke7cpEOgtN_lQCpz4L3_gsHlY-EE0zXLY_G2ZE5bkOd0TaFtepEcgShN4el1Q1HPLGI"/>
+</div>
+<div class="md:col-span-4 flex flex-col justify-center py-8">
+<span id="featuredCategory" class="font-label-caps text-label-caps text-primary mb-2">Flower Care</span>
+<h2 id="featuredTitle" class="font-headline-lg text-headline-lg mb-6 leading-tight">The Secret Language of Lilies</h2>
+<p id="featuredExcerpt" class="font-body-lg text-body-lg text-on-secondary-fixed-variant mb-8 leading-relaxed">
+                        Beyond their visual grandeur, lilies carry deep symbolic roots that have shaped garden culture for centuries. Discover how to interpret their silent messages and keep them thriving in your home environment.
+                    </p>
+<button id="featuredReadMore" class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-surface border-b border-primary pb-1 self-start hover:text-primary transition-colors" type="button">
+                        Read More 
+                        <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Blog Layout with Sidebar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Blog Feed -->
+<div class="lg:col-span-8">
+<section id="blogDetail" class="hidden mb-section-padding-mobile" aria-live="polite">
+<button id="backToBlogList" class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 mb-8 hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+Back to Blogs
+</button>
+<article class="bg-white">
+<div class="mb-8">
+<span id="detailCategory" class="font-label-caps text-label-caps text-primary block mb-3"></span>
+<h2 id="detailTitle" class="font-headline-lg text-headline-lg md:text-[52px] leading-tight mb-4"></h2>
+<span id="detailDate" class="font-label-caps text-[11px] text-on-secondary-fixed-variant"></span>
+</div>
+<img id="detailImage" alt="" class="w-full aspect-[16/10] object-cover mb-8"/>
+<div id="detailBody" class="space-y-5 font-body-lg text-body-lg text-on-secondary-fixed-variant leading-relaxed"></div>
+</article>
+<section class="mt-section-padding-mobile pt-10 border-t border-outline-variant">
+<h3 class="font-headline-md text-headline-md mb-8 text-center">Other Blogs</h3>
+<div id="relatedPosts" class="grid grid-cols-1 md:grid-cols-3 gap-gutter"></div>
+</section>
+</section>
+<div id="blogList" class="grid grid-cols-1 md:grid-cols-2 gap-y-stack-lg gap-x-gutter">
+<!-- Post Card 1 -->
+<article class="blog-card group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-4" data-post="spring-awakening" tabindex="0" role="button" aria-label="Read Spring's First Awakening">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<span class="absolute top-4 left-4 z-10 bg-primary text-white font-label-caps text-[10px] px-3 py-1">Interior Styling</span>
+<img alt="Spring Blooms" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A lush, vibrant arrangement of spring flowers featuring poppies and wildflowers in a rustic ceramic pitcher. The setting is a bright, sunlit kitchen with white walls and natural wood surfaces. The photography style is modern and airy, with a focus on vivid colors and natural textures, embodying a botanical luxury feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNxmcWiC9rrIUVbkx4USstuBhIKZdAyNDjKZ9YP21aBZVij1aA5zRvnhL6LvfzHuJms4nLl9so03ms9VHVmeZg8pzzUIoOzgd-RsitpzoBMZuzc2KZKPX967HlVY5l_o8dpedvgHzbNKaEWuufmjEoi4Qu26EqXo8ddyrjW7S9GOIaUErhMVRaPZOa1Gkk77tcXO_ZhUZXb0owwi-M6gF8bvXSJYkWtRJD_Xy_iPMzVPtNt_In49hiWbfaxW25qCvgXcGhISHM000"/>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-[11px] text-on-secondary-fixed-variant block mb-2">March 14, 2024</span>
+<h3 class="font-headline-md text-[24px] mb-3 group-hover:text-primary transition-colors">Spring's First Awakening</h3>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant mb-4 line-clamp-2">How to incorporate the season's earliest blooms into a modern interior setting without overwhelming the space.</p>
+</div>
+</article>
+<!-- Post Card 2 -->
+<article class="blog-card group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-4" data-post="floral-gift" tabindex="0" role="button" aria-label="Read The Art of the Floral Gift">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<span class="absolute top-4 left-4 z-10 bg-primary text-white font-label-caps text-[10px] px-3 py-1">Gift Guides</span>
+<img alt="Wrapped Bouquet" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A professionally wrapped bouquet of peonies in premium craft paper with a silk ribbon. The lighting is soft and warm, highlighting the high-quality materials and artisanal craftsmanship. The background is a clean, neutral tone, emphasizing a 'Quiet Luxury' retail experience for high-end floral gifting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx0PVAU2Rs7ogXWkvkgEFPDzFzALhv5MrIe2Nd6I8ecNriKjetlUpnVcMzvUStcAXP8-PMjfNq3ksV2JjHv1VeSuVTVf_EaM07SMTqNpKYLG4HHQXQ95HaZ11xIeI8UAGVjsMlBPF2U-h9rI8IYmHgSprroE-CdqwGK47Asm04v09VR8NX64lv6efIBMzfaeYlCAC2zBH_8Gj2hbyM9UPjQOTqFYtGnuB834JmeXk3RTvLZAD-zs7uxsXxs0fKoSpLu0a646IXNUI"/>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-[11px] text-on-secondary-fixed-variant block mb-2">March 10, 2024</span>
+<h3 class="font-headline-md text-[24px] mb-3 group-hover:text-primary transition-colors">The Art of the Floral Gift</h3>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant mb-4 line-clamp-2">Personalizing your bouquets: a guide to choosing stems that reflect the unique personality of your recipient.</p>
+</div>
+</article>
+<!-- Post Card 3 -->
+<article class="blog-card group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-4" data-post="bloom-life" tabindex="0" role="button" aria-label="Read Extending the Bloom Life">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<span class="absolute top-4 left-4 z-10 bg-primary text-white font-label-caps text-[10px] px-3 py-1">Flower Care</span>
+<img alt="Wilted Roses" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close up of a single pink rose in a minimalist glass vase, backlit by gentle morning sun. The image conveys a mood of serenity and delicate beauty. The lighting creates a soft halo effect around the petals, showcasing the fine details and textures of the bloom in a sophisticated, editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBck5-V7sMdwLFtWtICAhhRwqz_xQgHRrD1OHjtmkma9uGJIyscPjAgQ6mkNeIWwV0jH05tOJ6ZhKd1CyLEqTkEw0-9ASZXfqPugjWn5d4tkf-nGQkvWvbmcuKBtxUpQ1BU3RoN3e37LVBfFivIkt-8brhVK3IH-r7lWPwlLmaUVlyVR3IEWvOAquUENIIQO_vyxExEhSfTve6DTGT58vKXzMSF8d_B0s9CVIAbGSQ0qfZEX1rpHe14ZC-gtDhfxlVAK45DqfQWfCQ"/>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-[11px] text-on-secondary-fixed-variant block mb-2">March 05, 2024</span>
+<h3 class="font-headline-md text-[24px] mb-3 group-hover:text-primary transition-colors">Extending the Bloom Life</h3>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant mb-4 line-clamp-2">Practical tips and professional secrets for keeping your cut roses fresh and vibrant for over two weeks.</p>
+</div>
+</article>
+<!-- Post Card 4 -->
+<article class="blog-card group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-4" data-post="minimalist-greenery" tabindex="0" role="button" aria-label="Read Minimalist Greenery">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<span class="absolute top-4 left-4 z-10 bg-primary text-white font-label-caps text-[10px] px-3 py-1">Interior Styling</span>
+<img alt="Minimalist Space" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A minimalist living room featuring a single large monstera plant in a concrete planter. High vertical whitespace, soft shadows, and a neutral color palette of off-white and grey. The atmosphere is calm and premium, illustrating how greenery acts as a living sculpture in modern architectural spaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp1e0K6lK7sHg0Fb4U1cFf-ojfbR7dNGjlvUYzLUNe1J003PWCDglErR0JjdC9dmVH_GfjEqKFzXCdPtD8HJe3blGyyvuNSx3Qbee_Wcgtd2mTzpZEVEEhUoq-adgGnHLVbYxg9EUF9EYXT19_jdm5O1TwcDCyQomhk-Kkkpu0dAFeXaHNgbK-9VwVN7nd3vgSM57qR4No2Kr7rMWa10EeKoYIZpEBgMxjGCs1WwBBBJrqm7btUFuYcBOSNwYOTDa_MScxDHUe71U"/>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-[11px] text-on-secondary-fixed-variant block mb-2">Feb 28, 2024</span>
+<h3 class="font-headline-md text-[24px] mb-3 group-hover:text-primary transition-colors">Minimalist Greenery</h3>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant mb-4 line-clamp-2">Sometimes less is more. Explore the architectural beauty of structural plants in modern living spaces.</p>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div id="blogPagination" class="flex justify-center items-center gap-4 mt-section-padding-mobile">
+<button id="prevBlogPage" class="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-colors" type="button" aria-label="Previous blog page">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="blog-page-button w-10 h-10 bg-primary text-white font-label-caps transition-colors" type="button" data-page="0">01</button>
+<button class="blog-page-button w-10 h-10 border border-outline-variant font-label-caps hover:bg-surface-container transition-colors" type="button" data-page="1">02</button>
+<button class="blog-page-button w-10 h-10 border border-outline-variant font-label-caps hover:bg-surface-container transition-colors" type="button" data-page="2">03</button>
+<button id="nextBlogPage" class="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-colors" type="button" aria-label="Next blog page">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Right: Sidebar -->
+<aside class="lg:col-span-4 space-y-stack-lg">
+<!-- Sidebar: Search -->
+<div class="p-gutter bg-surface-container-low">
+<h4 class="font-label-caps text-label-caps mb-6 border-b border-outline-variant pb-2">Search Journal</h4>
+<div class="relative">
+<input class="w-full bg-white border-none focus:ring-1 focus:ring-primary py-3 px-4 text-sm font-body-md" placeholder="Keywords..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+</div>
+<!-- Sidebar: Popular Posts -->
+<div class="p-gutter bg-surface-container-low">
+<h4 class="font-label-caps text-label-caps mb-6 border-b border-outline-variant pb-2">Popular Musings</h4>
+<div class="space-y-6">
+<a class="flex gap-4 group" href="#">
+<div class="w-20 h-20 flex-shrink-0">
+<img alt="Small bloom" class="w-full h-full object-cover" data-alt="Close up of a small blue hydrangea bloom against a soft grey background. Professional studio lighting highlights the intricate fractal patterns of the flower, aligning with a premium botanical editorial brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA64HLbSU1rts1WJ8pedHoUq6OnrU8gVzjqv8FbHthGPT_Kdh1QyJ1KyYdBEQWozTavnlX-9LsrfuMV1bxgaesS8FjkSIKwsqbbHJoNo5UdZdQoXTXX2qPbupNaNAkMAo5x5gr3akIPyIPs2Ml5CBJlVNRHiwT6oM5QLBI4gr6jMR-L_2gg3yuz93cfZ_d2paKPo6aWsA6n_gBA-BCDA_bKB3Q5k57yHwZ1LpBGaSuj93GehzxhJ6H2r63pFW0aG9gAFpN6S4mLcZ8"/>
+</div>
+<div>
+<h5 class="font-headline-sm text-sm leading-tight group-hover:text-primary transition-colors">Maintaining Hydrangea Hues</h5>
+<span class="font-label-caps text-[10px] text-on-secondary-fixed-variant">Jan 12, 2024</span>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="w-20 h-20 flex-shrink-0">
+<img alt="Orchid" class="w-full h-full object-cover" data-alt="An elegant white orchid in a minimalist ceramic pot. The lighting is soft and ethereal, emphasizing the delicate, almost translucent petals. The style is modern corporate minimalist, with high whitespace and serenity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnHOypgFzwMZL94HVN9HiDY01ee2GceBi3zGfOleWL6p4MdDFAaZ3HiqY2Z-YNWN6sDJ5q7CyfuQTXvjlE2NqRFhXkrRr8iuFfms4kcrirxSx58mWmVXhr8wD_dHmKrB50cDNFBBnm5s-Qcpz-6QsMzqcONs-WrPoGkExlV8l95eKEZ4f0MgPYGnl4_gBLlYyzA46icP3JxRxNoouxS_SjvKUbhDvPj30BufRw0MrpUH8wS1eouuKfHSbYtFSnts5SEpIaD9bfSCs"/>
+</div>
+<div>
+<h5 class="font-headline-sm text-sm leading-tight group-hover:text-primary transition-colors">The Orchid Masterclass</h5>
+<span class="font-label-caps text-[10px] text-on-secondary-fixed-variant">Feb 02, 2024</span>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="w-20 h-20 flex-shrink-0">
+<img alt="Tulips" class="w-full h-full object-cover" data-alt="A bunch of yellow tulips in a clear glass vase, sitting on a marble table with bright daylight streaming through a nearby window. The mood is fresh and energetic, reflecting the vibrant colors and premium quality of seasonal blooms." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5K2hNLtP8NVzYqw9dE2BaTvuMyXt1FPw2u7Qp43Z_aBw5AdV4Ggx-E6lUV_z55Yh6PxQfvUu62s4_H5FGy1dTnWm_cBVuzCRJf3iDG4WzntjRbSmeRgIPc5PSQW9rn1zJNgGxyzwb5IYVNlNods0ZPAdG3oHuXeHdouemz6hCsQygJmKK67Ahm-xZXmJcQN3UVDRsVJ2tJnVeAOn78GrdpIcGJZrRw-erf02adBywaKibTXb3-AZfehNHIzUPNq6MeMdSBzeayjA"/>
+</div>
+<div>
+<h5 class="font-headline-sm text-sm leading-tight group-hover:text-primary transition-colors">Sourcing Seasonal Tulips</h5>
+<span class="font-label-caps text-[10px] text-on-secondary-fixed-variant">Dec 28, 2023</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Sidebar: Instagram Feed Widget -->
+<div class="p-gutter bg-surface-container-low">
+<h4 class="font-label-caps text-label-caps mb-6 border-b border-outline-variant pb-2">@KNGU_BLOOMS</h4>
+<div class="grid grid-cols-3 gap-2">
+<div class="aspect-square bg-surface-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Insta 1" class="w-full h-full object-cover" data-alt="A stylish Instagram lifestyle shot of a woman carrying a large bouquet of wildflowers. High-contrast lighting, modern fashion, and a focus on the natural, organic beauty of the flowers. Perfect for a premium retail brand's social feed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1hUEFwNJYgbnqxFcfqLaWjXOJee3DitD80z_AXvY--Su-vK7p6XVRGC7LGJ295TJXH9-KyRSJziFRsZa76nX9i4YkY97-WNZi1tsFjc_MKlVMelZaagMBWExK9sc0llDnmYMHLsuSRtbPkplrYP8CuPiDKLlAPFi3kpeYfW1U5fCc0EEEwWx2HS5dCykc_XEPTnM-3YRPkrWjUk1YWYlOLASGhaCWMefmoYNn_p5YSdy8CGXuVxJR0HOPjRwpcGcUbhojtcFtofI"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Insta 2" class="w-full h-full object-cover" data-alt="A detailed macro shot of a rose's petals, highlighting the texture and dewdrops. The lighting is soft and dreamy, using a palette of soft pinks and creams. Botanical modernism style with high aesthetic appeal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMAmBR4Bxl7CRoh3AAJfkigX1fEypeHE2tVnxZe5y60utpINEn7oL3eKjc8haM23YScJXtrp36FlT58pWZe_1HurSGzJhgZcHCnFkjkxJLL9unlS4vowv8sgwVyskrO3ZjqiMqMLJYdN7srujGK-1zFKzK1SmiQvzk9pPM89Xczc_DRvEVR8HUbqtN8NE_aXeaS49ep925pUzefoHeWKuC6144Er3b851BbEKAQAB79XH0Dqa3M28wklizkIR42tXeSxLPgzhzC1s"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Insta 3" class="w-full h-full object-cover" data-alt="An artistic arrangement of dried flowers and eucalyptus in a modern glass vase. The mood is nostalgic yet contemporary, using muted tones and high-key lighting for a clean, editorial look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3pryVU3VhEHB-g30D3INlCUf_15lcNPkog4CXKVrnaS-dyC3pdA9XQk9AJDyr5aS--ffYNL8yodIaZxgJZ4uymQE2XB6JNqrxAXva_pq8CcEvxsjI0XcXc-qK92JHS-ZUfjzjk2h7t6OrW1--KqYoz3GJXA5Ck07br2YzPYtAjYoaGcrop6WdCw_Dd3Fk3RmJrqIxLMEHXycGY503JWgesz_kd9KxKDF1MSUbouZYkbIUR6UjbHAfYSTpdtz8J1NUYdc-XWEyQgM"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Insta 4" class="w-full h-full object-cover" data-alt="A sun-drenched floral shop interior with high ceilings and white walls. Plants and flower arrangements are displayed on clean, minimalist shelving. The atmosphere is warm, welcoming, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYtfFzVli_g4TrsZwnxEqvYg9_6F2GTMaj2N1GZHgmGn4fBK748i2IkkU0VVv-1He3iWt54e-yqKwPRjm9azxtEmS7M9ZY_L9P6Q8AbjI63dtmRCZZxhBUPTA9lpYRhu4VbYvrYz75xr3EsRZ6dvqg8gQBafKXTjPYK3iInwgsabj7IoYNgeVA2AnZQwDfY-1graykfNQom1I3uxEZR7SX3ClpRkOdzUoWyoRtjJiv2qCfOuKS4eSyAPr_kKj-SlFpx5Wlc8OV8xs"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Insta 5" class="w-full h-full object-cover" data-alt="A minimalist flat-lay of floristry tools: heavy shears, twine, and a few loose stems on a white marble surface. Clean, organized, and sophisticated, reflecting the artisanal care of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjMB-VydtAz09bxXx_7W1dcsylTvLbF7UUCzMOGAk60iNduSXrywuMmIMoJgEgUUVUqrYqFsQ1tg7Wnvsj88JKf-LyArLcVVT08knP1Wksyiw-462u9Wc5ElI_PY47v4qkl75KJGr1YGy4-oR1LnjfQCkp1Jp2gTeWLf3cYh_1UJUPorQDXQnPGJaOR7z75DrOFYWTx15KBZM73IkM9cgmqm4O1jgnZyfa2Ml9tIsQmjwkS1Ud-Z6x3w9sPodlRW2-I2nREW8axqk"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Insta 6" class="w-full h-full object-cover" data-alt="A vibrant arrangement of exotic flowers in a dark, moody setting. Deep reds and purples are illuminated by a single spotlight, creating a dramatic, high-end artistic effect for a luxury floral boutique." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANndBEOfXcxCorkNxMz5yyP_RF4GrpStAtucLJ5aZLPTqCMSco5h58Y0Lia7j34-rBtt2rHvQHPxBqjrLgHK8W8y9gg61IUeFbaXe_DsuRZ9VvLpcv2rUpb7gYglH0POz0UyDQZLw3c6HoQKBL_zsxdlM8JSApN-syYnx55YAUH-GGhCYeuRJZy3TGi0vQmXXHizekqH91yNh1kypiq1bguP7qM5cY34JXnpanm9Rjd6F2vc2vbVVuWTgP4oMoIfZXovIuYRqYzuI"/>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-primary text-primary font-label-caps text-[10px] hover:bg-primary hover:text-white transition-all uppercase">Follow Journey</button>
+</div>
+<!-- Sidebar: Newsletter -->
+<div class="p-gutter border-2 border-primary text-center">
+<h4 class="font-headline-md text-2xl mb-4 italic">Join the Garden</h4>
+<p class="font-body-md text-sm text-on-secondary-fixed-variant mb-6">Receive weekly tips on floral care and exclusive first access to seasonal collections.</p>
+<form class="space-y-4">
+<input class="w-full border-b border-outline-variant focus:border-primary border-t-0 border-l-0 border-r-0 bg-transparent py-2 text-center text-sm focus:ring-0" placeholder="Your email address" type="email"/>
+<button class="bg-primary text-white font-label-caps text-xs py-4 px-8 w-full hover:bg-on-primary-container transition-colors tracking-widest">SUBSCRIBE</button>
+</form>
+</div>
+</aside>
+</div>
+</main>
+<!-- BEGIN: Footer -->
+<footer class="bg-on-background text-white pt-20 pb-10">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+<!-- Brand Section -->
+<div class="lg:col-span-1">
+<a class="text-2xl font-serif font-bold text-white mb-6 block" href="home.html">Kngu.</a>
+<p class="text-sm text-gray-400 mb-6 leading-relaxed">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.</p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">fb</span></a>
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">tw</span></a>
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">ig</span></a>
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">yt</span></a>
+</div>
+</div>
+<!-- Links Column 1 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">INFORMATION</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Search Terms</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Advanced Search</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Helps &amp; Faqs</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Store Location</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Orders &amp; Returns</a></li>
+</ul>
+</div>
+<!-- Links Column 2 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">MY ACCOUNT</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Delivery</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Legal Notice</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Secure payment</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sitemap</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">About us</a></li>
+</ul>
+</div>
+<!-- Links Column 3 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">HELP</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">FAQ's</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing Plans</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Track</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Your Order</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Returns</a></li>
+</ul>
+</div>
+<!-- Links Column 4 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">CUSTOMER SERVICE</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">My Account</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Use</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Deliveries &amp; Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Gift card</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Legal Notice</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="max-w-container-max mx-auto px-8 mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-xs text-gray-500">Copyright 2024. All Rights Reserved</p>
+<div class="flex gap-2">
+<img alt="Visa" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFCevqHnlfxYDULSSi8n1oUsGSO4WsWWjADyaS2Z_dTPasZT_Trz81wzyZAy-1m4F83864udfHHakBzGLQVwErDcb6i-H611gk5jPSH32dZLRyRM4IgA2hm9O1NfVcst4STmOo_mwH2sauRVqV9KiL0yyI5P_upukLkW78HVQTxDu3HFxA_aTls1Yl8QaULqubd-Ac50lF34OKEg728oe5dBJiNLYE0NRiWfCwU6kGtHce0iZAVihNup8Z-u0IbP-gHL-7fGp14AE"/>
+<img alt="Mastercard" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPCbcffEHakf2OlhaSagtM-5ZwgMzwI7cGR83QFjLkUas0LKgGrKO7uKkBsYGO98AX-2eIrvN7HhxaAUzxa3B8GELHrJj3QRTO8pFD5gq_0XkobzLyqzLhJgemlfc16INp0OsdSx7Zx502QKOLz0i7G2fGbaaJ3jCbuxjV8WbOtIFmaVoyux2ejfkMY2vt9K5dOnE8sG_kXGoB1lm0sK5Hkf4HpeF7PBaPcngVcKadYK_hbqxFcS6JcIIIlAWoD-W9dAcNAOP9w6s"/>
+<img alt="PayPal" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUDb5Lt18_eoAcLKKKV2lIHs6SjY3oyMX9eaj9pe3l9O2u092gl1epnNR77iOQS-km2hiFBIOMJ2atYABkcn4UaOP_j6K_mUWfcZJbyRmxwxV8-qU1fhP2g_5JCErJ-UO8omOMMOIRmuG5qL-jcgCrTgyxkkSHQE3KBlx5cKx85JlT6pUkdXFy36TxI8PfV2oKLSU9OMyTMg7MQvmTHMdpuvtPNDK3T8-8zUeMY9p9UGwMkWKUk3mZ0Q_vu-vJQD7iBm053mbbVe0"/>
+<img alt="Skrill" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2waZGOCgaoIDPW5RCrtLxL0uyfX7xwtJTcoEapzG9G0xUbVNe7wFzdduugI1EIBpC_NsGuq46uFAhmRRJ3NBxnylpSxjdH0_Bi-eG_pWpaN25EnMHBWVnhCS19G4_xXW3VPPPfJ3SEfEfHQ6vkBYbqqfr7MX_BoLQ9p9wrOB--6ScbnDb7A3_FBUrBUNMwRIUl-WyqMjJHzv7g7ZL4vswYCXY452jlhQoz9SRiovchHFaZMzLBX0XdfwfsbePbdpAAQwNFvwcXHY"/>
+<img alt="Maestro" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMpr-DqyWCH8cWO2XCRS29TNKi-XbI9tupgbruOWC9AgBzvC-wtQFmfsMQmNNNG7Aw1IirzsiJDcRXAqQs-Oc5d9iYvH6k_3oFuygSRCtUjeorjqdmw3kCFGxhBNSAzB9TPgPN5O50eeD-iP_R6jliyOkLecMvpwPurzGYnOvPcRfU8GXRoaksZn2zh_WKevl4G82pUTq66NRzxh9ffVmcd6rJRjuU_FJdMm7m-Tk9z9pYUktOcuWwLy8wjlER5UvplHnorxG0cM"/>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<script>
+        // Micro-interactions for scrolling header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-sm', 'bg-surface/95', 'backdrop-blur-sm');
+            } else {
+                header.classList.remove('shadow-sm', 'bg-surface/95', 'backdrop-blur-sm');
+            }
+        });
+
+        // Simple smooth scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        const blogCopy = {
+            'secret-language-lilies': [
+                "Lilies have long been connected with devotion, renewal, and quiet strength. Their sculptural petals make them feel formal, but their fragrance brings a soft, welcoming presence into the home.",
+                "White lilies are often chosen for peaceful interiors because they brighten a room without adding visual noise. They pair beautifully with clear glass, pale ceramics, linen textures, and warm natural light.",
+                "To style lilies well, remove lower leaves before placing them in water and give each stem enough space to open. Crowding the arrangement can hide the graceful curve that makes lilies so expressive.",
+                "As the blooms open, gently remove pollen from the anthers to protect tabletops and fabrics. This also keeps the arrangement looking clean and refined for several more days.",
+                "Keep lilies in a cool area away from direct sun and change the water regularly. With simple care, they can become the calm centerpiece of a room and carry their meaning long after the first day."
+            ],
+            'spring-awakening': [
+                "Spring's first flowers work best when the arrangement feels light, fresh, and unforced. Choose a few expressive stems, then give them room to breathe in a simple vase.",
+                "For modern interiors, balance bright blooms with quiet surroundings. Soft ceramics, clear glass, and natural wood help the flowers feel intentional instead of crowded.",
+                "Refresh the water daily and trim the stems at an angle every other day. This small habit keeps the arrangement open, lively, and beautiful for longer."
+            ],
+            'floral-gift': [
+                "A thoughtful floral gift begins with the person receiving it. Consider their favorite colors, the room where the bouquet will live, and the mood you want to send.",
+                "Romantic bouquets can be soft and layered, while birthday flowers can carry brighter color and playful movement. The best arrangements feel personal, not generic.",
+                "Finish the gift with neat wrapping and a short message. Those final details make the bouquet feel complete before the first flower is even seen."
+            ],
+            'bloom-life': [
+                "Long-lasting flowers start with clean water and clean tools. Remove any leaves that sit below the water line, because they can cloud the vase and shorten bloom life.",
+                "Keep cut flowers away from direct sun, warm appliances, and ripening fruit. A cool, calm spot helps petals stay firm and colors stay clear.",
+                "When a few stems fade early, remove them and rearrange the rest. A simple refresh can make the whole bouquet feel newly styled again."
+            ],
+            'minimalist-greenery': [
+                "Minimalist greenery is about shape, shadow, and space. A single sculptural plant can bring calm structure to a room without adding visual clutter.",
+                "Choose vessels with simple lines and neutral textures. Concrete, matte ceramic, or clear glass let the leaves become the main design element.",
+                "Place greenery where it can be seen from several angles. The best styling makes the plant feel like part of the architecture, not an afterthought."
+            ]
+        };
+
+        const blogDetail = document.getElementById('blogDetail');
+        const blogList = document.getElementById('blogList');
+        const blogPagination = document.getElementById('blogPagination');
+        const relatedPosts = document.getElementById('relatedPosts');
+        const detailCategory = document.getElementById('detailCategory');
+        const detailTitle = document.getElementById('detailTitle');
+        const detailDate = document.getElementById('detailDate');
+        const detailImage = document.getElementById('detailImage');
+        const detailBody = document.getElementById('detailBody');
+        const backToBlogList = document.getElementById('backToBlogList');
+        const blogCards = Array.from(document.querySelectorAll('.blog-card'));
+        const blogPageButtons = Array.from(document.querySelectorAll('.blog-page-button'));
+        const prevBlogPage = document.getElementById('prevBlogPage');
+        const nextBlogPage = document.getElementById('nextBlogPage');
+        const featuredReadMore = document.getElementById('featuredReadMore');
+        const featuredImage = document.getElementById('featuredImage');
+        const featuredPost = {
+            slug: 'secret-language-lilies',
+            category: document.getElementById('featuredCategory').textContent.trim(),
+            date: 'Featured Story',
+            title: document.getElementById('featuredTitle').textContent.trim(),
+            excerpt: document.getElementById('featuredExcerpt').textContent.trim(),
+            image: featuredImage.getAttribute('src'),
+            alt: featuredImage.getAttribute('alt')
+        };
+        const blogPageOrders = [
+            [0, 1, 2, 3],
+            [2, 0, 3, 1],
+            [1, 3, 0, 2]
+        ];
+        let currentBlogPage = 0;
+
+        function getCardData(card) {
+            return {
+                slug: card.dataset.post,
+                category: card.querySelector('span.absolute').textContent.trim(),
+                date: card.querySelector('.text-center span').textContent.trim(),
+                title: card.querySelector('h3').textContent.trim(),
+                excerpt: card.querySelector('p').textContent.trim(),
+                image: card.querySelector('img').getAttribute('src'),
+                alt: card.querySelector('img').getAttribute('alt')
+            };
+        }
+
+        function renderRelatedPosts(activeSlug) {
+            relatedPosts.innerHTML = '';
+            blogCards
+                .filter(card => card.dataset.post !== activeSlug)
+                .map(getCardData)
+                .forEach(post => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'group text-left';
+                    button.dataset.post = post.slug;
+                    button.innerHTML = `
+                        <div class="aspect-[4/5] overflow-hidden mb-4 relative bg-surface-container-low">
+                            <span class="absolute top-3 left-3 z-10 bg-primary text-white font-label-caps text-[9px] px-2 py-1">${post.category}</span>
+                            <img alt="${post.alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${post.image}">
+                        </div>
+                        <span class="font-label-caps text-[10px] text-on-secondary-fixed-variant block mb-2 text-center">${post.date}</span>
+                        <h4 class="font-headline-sm text-base leading-snug text-center group-hover:text-primary transition-colors">${post.title}</h4>
+                    `;
+                    button.addEventListener('click', () => showBlogPost(post.slug));
+                    relatedPosts.appendChild(button);
+                });
+        }
+
+        function showBlogPost(slug) {
+            const sourceCard = blogCards.find(card => card.dataset.post === slug);
+            const post = sourceCard ? getCardData(sourceCard) : featuredPost.slug === slug ? featuredPost : null;
+            if (!post) return;
+
+            detailCategory.textContent = post.category;
+            detailTitle.textContent = post.title;
+            detailDate.textContent = post.date;
+            detailImage.src = post.image;
+            detailImage.alt = post.alt;
+            detailBody.innerHTML = (blogCopy[slug] || [post.excerpt])
+                .map(paragraph => `<p>${paragraph}</p>`)
+                .join('');
+
+            renderRelatedPosts(slug);
+            blogList.classList.add('hidden');
+            blogPagination.classList.add('hidden');
+            blogDetail.classList.remove('hidden');
+            blogDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        blogCards.forEach(card => {
+            card.addEventListener('click', () => showBlogPost(card.dataset.post));
+            card.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    showBlogPost(card.dataset.post);
+                }
+            });
+        });
+
+        function renderBlogPage(pageIndex) {
+            currentBlogPage = (pageIndex + blogPageOrders.length) % blogPageOrders.length;
+            blogPageOrders[currentBlogPage].forEach(cardIndex => {
+                blogList.appendChild(blogCards[cardIndex]);
+            });
+
+            blogPageButtons.forEach(button => {
+                const isActive = Number(button.dataset.page) === currentBlogPage;
+                button.classList.toggle('bg-primary', isActive);
+                button.classList.toggle('text-white', isActive);
+                button.classList.toggle('border', !isActive);
+                button.classList.toggle('border-outline-variant', !isActive);
+                button.classList.toggle('hover:bg-surface-container', !isActive);
+                button.setAttribute('aria-current', isActive ? 'page' : 'false');
+            });
+        }
+
+        blogPageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                renderBlogPage(Number(button.dataset.page));
+                blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        prevBlogPage.addEventListener('click', () => {
+            renderBlogPage(currentBlogPage - 1);
+            blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        nextBlogPage.addEventListener('click', () => {
+            renderBlogPage(currentBlogPage + 1);
+            blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        backToBlogList.addEventListener('click', () => {
+            blogDetail.classList.add('hidden');
+            blogList.classList.remove('hidden');
+            blogPagination.classList.remove('hidden');
+            blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        featuredReadMore.addEventListener('click', () => showBlogPost('secret-language-lilies'));
+
+        renderBlogPage(0);
+    </script>
+</body></html>

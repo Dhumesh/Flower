@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kngu - Botanical Elegance Flower Shop</title>
+<!-- Google Fonts: Libre Caslon Text -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#b5251c',
+            surface: '#f9f9f9',
+            'surface-dim': '#dadada',
+            'surface-bright': '#f9f9f9',
+            'surface-container-lowest': '#ffffff',
+            'on-background': '#1a1a1a',
+            'surface-variant': '#e5e5e5',
+          },
+          fontFamily: {
+            serif: ['"Libre Caslon Text"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          maxWidth: {
+            'container-max': '1280px',
+          },
+          spacing: {
+            'section-padding-desktop': '80px',
+            'stack-lg': '40px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-typography">
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, .font-serif { font-family: 'Libre Caslon Text', serif; }
+    .nav-link { font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 600; }
+    .product-card { display: flex; flex-direction: column; height: 100%; }
+    .product-image-frame {
+      aspect-ratio: 4 / 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .product-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-background">
+<!-- BEGIN: NotificationBar -->
+<div class="bg-on-background text-white text-xs py-2 text-center relative">
+<span>All featured product 50% off <a class="underline ml-1" href="shop.html">Shop Now</a></span>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100">✕</button>
+</div>
+<!-- END: NotificationBar -->
+<!-- BEGIN: TopNavBar -->
+<header class="bg-surface sticky top-0 z-50 border-b border-surface-variant transition-all duration-300">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-4xl font-serif text-primary" href="home.html">Kngu</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-xs font-semibold uppercase tracking-widest text-primary border-b-2 border-primary pb-1 transition-all active:scale-95" href="home.html">Home</a>
+<a class="text-xs font-semibold uppercase tracking-widest text-gray-600 hover:text-primary transition-colors duration-300 active:scale-95" href="shop.html">Shop</a>
+<a class="text-xs font-semibold uppercase tracking-widest text-gray-600 hover:text-primary transition-colors duration-300 active:scale-95" href="blog.html">Blog</a>
+<a class="text-xs font-semibold uppercase tracking-widest text-gray-600 hover:text-primary transition-colors duration-300 active:scale-95" href="contact.html">Contact</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center border-b border-gray-300 px-2 py-1">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<input class="bg-transparent border-none text-sm focus:ring-0 placeholder-gray-400 w-40" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<button class="hover:scale-110 transition-transform" aria-label="Account">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="hover:scale-110 transition-transform" aria-label="Shopping bag">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="md:hidden hover:scale-110 transition-transform" aria-label="Menu">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</nav>
+</header>
+<!-- END: TopNavBar -->
+<main>
+<!-- BEGIN: Hero -->
+<section class="relative bg-[#fdf2f0] overflow-hidden min-h-[600px] flex items-center">
+<div class="max-w-container-max mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
+<div class="z-10 py-20">
+<span class="text-xs font-bold tracking-widest text-gray-500 block mb-4 border-l-2 border-primary pl-4 uppercase">20% Off For New Members</span>
+<h1 class="text-5xl md:text-7xl font-serif text-on-background mb-6 leading-tight">HAPPY MOTHER’S DAY!</h1>
+<p class="text-lg text-gray-600 mb-10">Bouquets your mom will love!</p>
+<a class="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold text-xs tracking-widest hover:bg-black transition-colors duration-300" href="shop.html">START SHOPPING</a>
+</div>
+<div class="relative">
+<img alt="Mother's Day Flowers" class="w-full h-auto object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ1xHPbymbfa1bKKd3ETViu5N75PzZI8sk5PolhpdaIq8dQ1v-lmYFSaaNE8bQtDw-JlNa_5rkwMjW8IAF_lF6XiIk-MhZ6-pnatLm_oi60W8VwF5Rl4sJMmb4SrL3HnzHWe8WBWw_vAmMso1wp9BjzRk7-0XMSdc4RCtLh48QxgG3lXpmLWmemBDQzraOcOM1Ta7h7pxypGPagQ4E9V_K4S1rhgHazJE5tcLMj6c4mVyBik7ZO3BSbDULs8Br-pgjkOqHlLUzWxQ"/>
+</div>
+</div>
+<!-- Carousel Controls -->
+<button class="absolute left-4 top-1/2 -translate-y-1/2 p-4 text-gray-400 hover:text-primary">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-gray-400 hover:text-primary">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</section>
+<!-- END: Hero -->
+<!-- BEGIN: InfoBanner -->
+<section class="py-12 bg-white border-b border-surface-variant">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Feature 1 -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-red-100 rounded-full text-red-500">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20"><path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path><path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7h-3v7h3.05a2.5 2.5 0 014.9 0H18a1 1 0 001-1V9.5a3.5 3.5 0 00-3.5-3.5H14z"></path></svg>
+</div>
+<div>
+<h4 class="font-bold text-sm">Free Delivery</h4>
+<p class="text-xs text-gray-500">Free shipping around the world for all orders over $120</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-teal-100 rounded-full text-teal-500">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+</div>
+<div>
+<h4 class="font-bold text-sm">Online Order</h4>
+<p class="text-xs text-gray-500">Don't worry you can order online by our site</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-purple-100 rounded-full text-purple-500">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" fill-rule="evenodd"></path></svg>
+</div>
+<div>
+<h4 class="font-bold text-sm">Freshness</h4>
+<p class="text-xs text-gray-500">You have freshness flowers every single order</p>
+</div>
+</div>
+<!-- Feature 4 -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-lime-100 rounded-full text-lime-500">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
+</div>
+<div>
+<h4 class="font-bold text-sm">Made By Artists</h4>
+<p class="text-xs text-gray-500">World for all orders over world for all artists</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: InfoBanner -->
+<!-- BEGIN: NewProducts -->
+<section class="py-20 max-w-container-max mx-auto px-8">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-serif mb-4">New Products</h2>
+<p class="text-gray-500 max-w-2xl mx-auto text-sm italic">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product 1 -->
+<div class="product-card group relative text-center">
+<div class="product-image-frame relative mb-4">
+<span class="absolute top-4 left-4 bg-primary text-white text-[10px] px-2 py-1 z-10">Soldout</span>
+<img alt="Spring Snowflake" class="transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtwwCTSN4dg9Mnyc99lCeMWkyQ5Hn3OAxtljncZcQstp4biqZtnOzYgNznJ0Fa0xTsyAxgExvRxfGL42ka0Ci5GwEKCiMf-MWMKe0WbBCmBYGbI_62KLgOhctOBqsVQHcJmMhQDGcmg0_kMHVUEHE_Mbiz401A_FMy5XUw000vG99kmnlGT5MtFN2oHwv-zaG4SLcNZvwkncw7-5dQkqXj9En2c6bJwuq3k3fhUxtMBYGhRaWjbyUNaUa_yQVpXabxCLgB8KaP3K8"/>
+</div>
+<div class="flex justify-center mb-2">
+<span class="text-yellow-400 text-xs">★★★★☆</span>
+</div>
+<h3 class="font-medium text-gray-800 mb-1">Spring Snowflake</h3>
+<div class="text-sm">
+<span class="text-primary font-bold">$19.00</span>
+<span class="text-gray-400 line-through ml-2">$29.00</span>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="product-card group relative text-center">
+<div class="product-image-frame relative mb-4">
+<img alt="Rock Soapwort" class="transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3oujLLHUpM-TKl48tEEwx4YKPhYiEdXDRrfO1XCqgscL4KTuwuaMLRECrh4z23mdgnceKQDOvuYtGbes4HhEepxCuAqqSOOSPI_CId6e3WSGRq9LBu7YIcuoJ41Eaff_qGt2MhXBg7FA_cVz7mIMDuKaI5BLiqR1SGL042bXGoI2hBjfTDNOuQxDQzth3SQTLk2jB9w5GqDa1o_VHE55ACh5R6a6e4xWfrTeENSZ3nsddnzwkHNj_3HylWT4Jpc5ZPrB0MtHxe2E"/>
+</div>
+<div class="flex justify-center mb-2">
+<span class="text-yellow-400 text-xs">★★★★☆</span>
+</div>
+<h3 class="font-medium text-gray-800 mb-1">Rock Soapwort</h3>
+<div class="text-sm">
+<span class="text-primary font-bold">$50.00</span>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="product-card group relative text-center">
+<div class="product-image-frame relative mb-4">
+<span class="absolute top-4 left-4 bg-gray-800 text-white text-[10px] px-2 py-1 z-10">-35%</span>
+<!-- Countdown Overlay Mockup -->
+<div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+<div class="bg-white/80 p-1 rounded w-10 text-center"><div class="text-[10px] font-bold">00</div><div class="text-[8px] uppercase">Days</div></div>
+<div class="bg-white/80 p-1 rounded w-10 text-center"><div class="text-[10px] font-bold">00</div><div class="text-[8px] uppercase">Hour</div></div>
+<div class="bg-white/80 p-1 rounded w-10 text-center"><div class="text-[10px] font-bold">00</div><div class="text-[8px] uppercase">Min</div></div>
+<div class="bg-white/80 p-1 rounded w-10 text-center"><div class="text-[10px] font-bold">00</div><div class="text-[8px] uppercase">Sec</div></div>
+</div>
+<img alt="Scarlet Sage" class="transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoUPZKWYaNrEPHVvrpWoNpuvz6dwBSHf7T4DEiwIYg4WkAPK6CKFsjgG-_p_jGGnaexPW4frPyiqIiexAjmzQcE0sTciDS-d1t7pB00WVj3K5bxLOVPJDD38wdCGTXgqHFdB-dMP0iFDEAr-RJwfQtjTQ_lfQISVrSft5yjMNTqRWFriv2JZSv8pdEmeOOIn8nw8-rFFI9cXf0z3q56s4tHBVHlmQSsahwcJQ4ltgcCs_3NvTr9XzxegMPIafoW5naMb4dNW0Aq8"/>
+</div>
+<div class="flex justify-center mb-2">
+<span class="text-yellow-400 text-xs">★★★★☆</span>
+</div>
+<h3 class="font-medium text-gray-800 mb-1">Scarlet Sage</h3>
+<div class="text-sm">
+<span class="text-primary font-bold">$39.00</span>
+<span class="text-gray-400 line-through ml-2">$60.00</span>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="product-card group relative text-center">
+<div class="product-image-frame relative mb-4">
+<img alt="Foxglove Flower" class="transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWlFx8_yNetCEpOBPb6C66v5MHhCUWfWeSHO7lvAq8RFP4lLCdW8_yZTAd2KJgpJeLYb9gKyxWJXjtrlTtQeUCv81GpO0Y317pQNDZc6XDMoJPobQCfGa6m82kNAC5BjMbI8Q5LcNOk2tWtMJN7tXwEDI0JJ5TlkYTDhMB0ix-pBHuWQMl6Okix7Ed6QRtGQB_ehjgZ85C12_fnN1FSsjzVdC3PHpQzeabRHH1wkPw50htfkoa1IKRRLDw7C4byJwxqhGiUTIXlE4"/>
+</div>
+<div class="flex justify-center mb-2">
+<span class="text-yellow-400 text-xs">★★★★☆</span>
+</div>
+<h3 class="font-medium text-gray-800 mb-1">Foxglove Flower</h3>
+<div class="text-sm">
+<span class="text-primary font-bold">$79.00</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: NewProducts -->
+<!-- BEGIN: PromotionSection -->
+<section class="bg-white py-16">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<img alt="Valentine's Flowers" class="w-full h-auto rounded-lg shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjHwh7n07YFnCMLstCtQxayJuaUHCuQFnt7R1wPk-aMRBo3xRIvZR5JQghzl7FJwVwh3Jb1KYumHjK3ZPZRUdZ64Ap874YJtuFO6-4BdszPhJ4Op8E-GdC3D2TqdDMmvGRygkJyDHNCcPakfmdQBTIbSZMFDI13FhN_ICfSWC7f2vQmziwGQPA4_3FKfDnkR_rJIGsUwcPMNw_2JhdXYUxgrHdkLT6mEWR8ouk07uJ85eEpF8ccUyxUgx1WF6ghnhAOpfs_ahUKZk"/>
+</div>
+<div>
+<h2 class="text-4xl font-serif mb-6 leading-tight">Suprise Your Valentine! Let us arrange a smile For Her.</h2>
+<p class="text-gray-500 mb-8 italic">Where flowers are our inspiration to create lasting memories. Whatever the occasion inspiration to create lasting memories...</p>
+<ul class="space-y-4 mb-10 text-sm text-gray-600">
+<li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Hand picked just for you.</li>
+<li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Hand picked just for you.</li>
+<li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Hand picked just for you.</li>
+</ul>
+<a class="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold text-xs tracking-widest hover:bg-black transition-all" href="shop.html">MORE DETAILS</a>
+</div>
+</div>
+</section>
+<!-- END: PromotionSection -->
+<!-- BEGIN: FeaturedItems -->
+<section class="py-20 max-w-container-max mx-auto px-8">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-serif mb-4">Featured Items</h2>
+<p class="text-gray-500 max-w-2xl mx-auto text-sm italic mb-8">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.</p>
+<div class="flex justify-center gap-8 border-b border-gray-100 pb-4">
+<button class="text-primary font-bold text-xs tracking-widest uppercase border-b-2 border-primary pb-4">NEW</button>
+<button class="text-gray-400 hover:text-primary font-bold text-xs tracking-widest uppercase pb-4">FEATURED</button>
+<button class="text-gray-400 hover:text-primary font-bold text-xs tracking-widest uppercase pb-4">BEST SELLERS</button>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Reusing product structure for items 1-8 -->
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><span class="absolute top-4 left-4 bg-gray-800 text-white text-[10px] px-2 py-1 z-10">-34%</span><img alt="Lily Majesty Palm" src="images/lily.png"/></div>
+<h3 class="text-sm font-medium">Lily Majesty Palm</h3>
+<p class="text-primary font-bold text-sm">$19.00 <span class="text-gray-400 line-through font-normal ml-1">$29.00</span></p>
+</div>
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><span class="absolute top-4 left-4 bg-gray-800 text-white text-[10px] px-2 py-1 z-10">-10%</span><img alt="Wild Roses" src="images/wild.png"/></div>
+<h3 class="text-sm font-medium">Wild Roses</h3>
+<p class="text-primary font-bold text-sm">$19.00 <span class="text-gray-400 line-through font-normal ml-1">$21.00</span></p>
+</div>
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><span class="absolute top-4 left-4 bg-primary text-white text-[10px] px-2 py-1 z-10">Soldout</span><img alt="Spring Snowflake" src="images/spring.png"/></div>
+<h3 class="text-sm font-medium">Spring Snowflake</h3>
+<p class="text-primary font-bold text-sm">$19.00 <span class="text-gray-400 line-through font-normal ml-1">$29.00</span></p>
+</div>
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><span class="absolute top-4 left-4 bg-gray-800 text-white text-[10px] px-2 py-1 z-10">-27%</span><img alt="Rock Soapwort" src="images/rock.png"/></div>
+<h3 class="text-sm font-medium">Rock Soapwort</h3>
+<p class="text-primary font-bold text-sm">$55.00 <span class="text-gray-400 line-through font-normal ml-1">$75.00</span></p>
+</div>
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><img alt="Sweet Alyssum" src="images/sweet.png"/></div>
+<h3 class="text-sm font-medium">Sweet Alyssum</h3>
+<p class="text-primary font-bold text-sm">$50.00</p>
+</div>
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><span class="absolute top-4 left-4 bg-gray-800 text-white text-[10px] px-2 py-1 z-10">-18%</span><img alt="Summer Savory" src="images/summer.png"/></div>
+<h3 class="text-sm font-medium">Summer Savory</h3>
+<p class="text-primary font-bold text-sm">$40.00 <span class="text-gray-400 line-through font-normal ml-1">$85.00</span></p>
+</div>
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><img alt="Rock Soapwort" src="images/soapwort.png"/></div>
+<h3 class="text-sm font-medium">Rock Soapwort</h3>
+<p class="text-primary font-bold text-sm">$50.00</p>
+</div>
+<div class="product-card text-center group">
+<div class="product-image-frame relative mb-4"><span class="absolute top-4 left-4 bg-primary text-white text-[10px] px-2 py-1 z-10">Soldout</span><img alt="Majesty Palm" src="images/majesty.png"/></div>
+<h3 class="text-sm font-medium">Majesty Palm</h3>
+<p class="text-primary font-bold text-sm">$19.00 <span class="text-gray-400 line-through font-normal ml-1">$29.00</span></p>
+</div>
+</div>
+</section>
+<!-- END: FeaturedItems -->
+<!-- BEGIN: Testimonial -->
+<section class="py-24 bg-[#fdf2f0] text-center relative overflow-hidden">
+<div class="max-w-3xl mx-auto px-8 relative z-10">
+<p id="reviewText" class="text-2xl md:text-3xl font-serif italic text-gray-700 leading-relaxed mx-auto max-w-2xl">
+          “Beautiful flowers and fast delivery. The bouquet looked exactly like the pictures on the website.”
+        </p>
+</div>
+<!-- Carousel Arrows -->
+<button id="prevReview" class="absolute left-10 top-1/2 -translate-y-1/2 text-gray-300 hover:text-primary" aria-label="Previous review"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+<button id="nextReview" class="absolute right-10 top-1/2 -translate-y-1/2 text-gray-300 hover:text-primary" aria-label="Next review"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+</section>
+<!-- END: Testimonial -->
+<!-- BEGIN: FlowerExperts -->
+<section class="py-20 max-w-container-max mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-serif mb-4">Flower Experts</h2>
+<p class="text-gray-500 max-w-2xl mx-auto text-sm italic">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+<div class="text-center group">
+<div class="mb-6 relative inline-block">
+<img alt="Marcos Alonso" class="w-48 h-48 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN2b7JgN6tRpxvothkq3ptu8CHTysX7ovceFHDF5Db1DngEuZu_ao5n102f2njs4qzdwlYQmhv6IDVLPuAGcAikzAaSqXu1t4QQxiLhRWaXnmonpb8TmfoiWxr5Gzn-8qbUwlVeGd_GbCSGGK-ctJWaBvOcID6LQw1u5yv7pv1OtVaGiJoq9dJOGlNVONj-iD2RkoH4YxUpFaFThZxuShQl3KKVbKOndZytP1gFko_7yu8twPdpRS52gO1XvNb1tOMXgnBJPhdtRY"/>
+</div>
+<h4 class="font-bold text-sm mb-1 uppercase tracking-wider">Marcos Alonso</h4>
+<p class="text-xs text-gray-500">Biologist</p>
+</div>
+<div class="text-center group">
+<div class="mb-6 relative inline-block">
+<img alt="Shara Friken" class="w-48 h-48 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQnIyXGMo-Q2bKq-uSAQGnc4P1k4aSh4-ls7pc_lLPzjZR7O_tncnKrXJQxYUlQhor4T2RCzeImxPf5PU8jNf1SuuZ01wFXxRKAr3MY-H7sVq6Tl7AN-NUGzH7i7iCpEHbY97qC3TybgA61Xophb4_6nSDR5WyUCDMrNri_9qT2ZkZV8bcFdakwXUd9xCxy9WBMmx3OYiJUP8y3Rpd6mm8uaBAJMt6JvTHXLWfD6X0yToG-soChq4S4xYqVcDSk2EB-bjDDeQYqxE"/>
+</div>
+<h4 class="font-bold text-sm mb-1 uppercase tracking-wider">Shara friken</h4>
+<p class="text-xs text-gray-500">Photographer</p>
+</div>
+<div class="text-center group">
+<div class="mb-6 relative inline-block">
+<img alt="Torvi Greac" class="w-48 h-48 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all border-4 border-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdPu9vEVYwaJLU1vvMlEA0INWsTKH0FEtOQlvpEXZmBwyFSUiOUfquNas5J-1oy3Tsv7YnQuYRAVVWZUMrB_H1Qml2HdvxYH8Ku3PWusIlLMffPwV_cAn5QYfJzDYbd3LgbeikNbdt2Mo5MVtmTKVOR-vghxrbjG6d-vtZWUHtEDNdvDy38IWdnwLZ7IX6IBC3_3xmMQkVPOPT8uU1yUUKix7W4Ug13s-VaVCNzvpLf2BE8Bwfj7V5vNo0oykVG0f5tKHOCGT5te0"/>
+</div>
+<h4 class="font-bold text-sm mb-1 uppercase tracking-wider">Torvi greac</h4>
+<p class="text-xs text-gray-500">Founder</p>
+</div>
+<div class="text-center group">
+<div class="mb-6 relative inline-block">
+<img alt="Alonso Gomej" class="w-48 h-48 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA2mpdbYB4LL8LbrqUfkXLyrVbICviHiwVcWsXHXn6pkVzYM1-n62kHAupoZtMm_gabHKeKATuHUk4TRRx8Eu0uicsNlkB43UjOlif5WTyyFwEH6bLPCBon4HBaGZsPP-ZcEon9-1N_RPP6yLHjF6pEf-zqWY_Ik2HtBMXASgIH0S5BVhnYGHdyS8kvRnY0j0_l-Xb4ksZkNsP74L8rHpi5bHZdZn59pbw9l8oT2ku9iw129_YY6wwGVvJPivkfd2mC2MX9ZVJLqQ"/>
+</div>
+<h4 class="font-bold text-sm mb-1 uppercase tracking-wider">Alonso Gomej</h4>
+<p class="text-xs text-gray-500">Florist</p>
+</div>
+</div>
+</section>
+<!-- END: FlowerExperts -->
+<!-- BEGIN: Blog -->
+<section class="py-20 bg-white">
+<div class="max-w-container-max mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-serif mb-4">From Our Blog</h2>
+<p class="text-gray-500 max-w-2xl mx-auto text-sm italic">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Blog Post 1 -->
+<article class="group">
+<a class="block" href="blog.html">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<span class="absolute top-4 left-4 z-10 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">Interior Styling</span>
+<img alt="Spring Blooms" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNxmcWiC9rrIUVbkx4USstuBhIKZdAyNDjKZ9YP21aBZVij1aA5zRvnhL6LvfzHuJms4nLl9so03ms9VHVmeZg8pzzUIoOzgd-RsitpzoBMZuzc2KZKPX967HlVY5l_o8dpedvgHzbNKaEWuufmjEoi4Qu26EqXo8ddyrjW7S9GOIaUErhMVRaPZOa1Gkk77tcXO_ZhUZXb0owwi-M6gF8bvXSJYkWtRJD_Xy_iPMzVPtNt_In49hiWbfaxW25qCvgXcGhISHM000"/>
+</div>
+<div class="text-center">
+<span class="text-[11px] text-gray-500 uppercase tracking-widest block mb-2">March 14, 2024</span>
+<h3 class="text-2xl font-serif mb-3 group-hover:text-primary transition-colors">Spring's First Awakening</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">How to incorporate the season's earliest blooms into a modern interior setting without overwhelming the space.</p>
+</div>
+</a>
+</article>
+<!-- Blog Post 2 -->
+<article class="group">
+<a class="block" href="blog.html">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<span class="absolute top-4 left-4 z-10 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">Gift Guides</span>
+<img alt="Wrapped Bouquet" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx0PVAU2Rs7ogXWkvkgEFPDzFzALhv5MrIe2Nd6I8ecNriKjetlUpnVcMzvUStcAXP8-PMjfNq3ksV2JjHv1VeSuVTVf_EaM07SMTqNpKYLG4HHQXQ95HaZ11xIeI8UAGVjsMlBPF2U-h9rI8IYmHgSprroE-CdqwGK47Asm04v09VR8NX64lv6efIBMzfaeYlCAC2zBH_8Gj2hbyM9UPjQOTqFYtGnuB834JmeXk3RTvLZAD-zs7uxsXxs0fKoSpLu0a646IXNUI"/>
+</div>
+<div class="text-center">
+<span class="text-[11px] text-gray-500 uppercase tracking-widest block mb-2">March 10, 2024</span>
+<h3 class="text-2xl font-serif mb-3 group-hover:text-primary transition-colors">The Art of the Floral Gift</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">Personalizing your bouquets: a guide to choosing stems that reflect the unique personality of your recipient.</p>
+</div>
+</a>
+</article>
+<!-- Blog Post 3 -->
+<article class="group">
+<a class="block" href="blog.html">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<span class="absolute top-4 left-4 z-10 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">Flower Care</span>
+<img alt="Wilted Roses" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBck5-V7sMdwLFtWtICAhhRwqz_xQgHRrD1OHjtmkma9uGJIyscPjAgQ6mkNeIWwV0jH05tOJ6ZhKd1CyLEqTkEw0-9ASZXfqPugjWn5d4tkf-nGQkvWvbmcuKBtxUpQ1BU3RoN3e37LVBfFivIkt-8brhVK3IH-r7lWPwlLmaUVlyVR3IEWvOAquUENIIQO_vyxExEhSfTve6DTGT58vKXzMSF8d_B0s9CVIAbGSQ0qfZEX1rpHe14ZC-gtDhfxlVAK45DqfQWfCQ"/>
+</div>
+<div class="text-center">
+<span class="text-[11px] text-gray-500 uppercase tracking-widest block mb-2">March 05, 2024</span>
+<h3 class="text-2xl font-serif mb-3 group-hover:text-primary transition-colors">Extending the Bloom Life</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">Practical tips and professional secrets for keeping your cut roses fresh and vibrant for over two weeks.</p>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<!-- END: Blog -->
+<!-- BEGIN: Newsletter -->
+<section class="py-20 bg-surface text-center">
+<div class="max-w-xl mx-auto px-8">
+<h2 class="text-4xl font-serif mb-10">Join The Colorful Bunch!</h2>
+<form class="flex flex-col sm:flex-row gap-0 border-b border-gray-300 pb-2">
+<div class="flex items-center flex-1">
+<svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm placeholder-gray-400" placeholder="Your email address" type="email"/>
+</div>
+<button class="text-[10px] font-bold tracking-widest uppercase text-gray-600 hover:text-primary transition-colors" type="submit">SUBSCRIBE</button>
+</form>
+</div>
+</section>
+<!-- END: Newsletter -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="bg-on-background text-white pt-20 pb-10">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+<!-- Brand Section -->
+<div class="lg:col-span-1">
+<a class="text-2xl font-serif font-bold text-white mb-6 block" href="home.html">Kngu.</a>
+<p class="text-sm text-gray-400 mb-6 leading-relaxed">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.</p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">fb</span></a>
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">tw</span></a>
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">ig</span></a>
+<a class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="text-xs">yt</span></a>
+</div>
+</div>
+<!-- Links Column 1 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">INFORMATION</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Search Terms</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Advanced Search</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Helps &amp; Faqs</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Store Location</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Orders &amp; Returns</a></li>
+</ul>
+</div>
+<!-- Links Column 2 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">MY ACCOUNT</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Delivery</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Legal Notice</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Secure payment</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sitemap</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">About us</a></li>
+</ul>
+</div>
+<!-- Links Column 3 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">HELP</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">FAQ's</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing Plans</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Track</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Your Order</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Returns</a></li>
+</ul>
+</div>
+<!-- Links Column 4 -->
+<div>
+<h4 class="font-bold text-xs tracking-widest uppercase mb-6 text-primary">CUSTOMER SERVICE</h4>
+<ul class="space-y-4 text-sm text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">My Account</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Use</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Deliveries &amp; Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Gift card</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Legal Notice</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="max-w-container-max mx-auto px-8 mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-xs text-gray-500">Copyright 2024. All Rights Reserved</p>
+<div class="flex gap-2">
+<img alt="Visa" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFCevqHnlfxYDULSSi8n1oUsGSO4WsWWjADyaS2Z_dTPasZT_Trz81wzyZAy-1m4F83864udfHHakBzGLQVwErDcb6i-H611gk5jPSH32dZLRyRM4IgA2hm9O1NfVcst4STmOo_mwH2sauRVqV9KiL0yyI5P_upukLkW78HVQTxDu3HFxA_aTls1Yl8QaULqubd-Ac50lF34OKEg728oe5dBJiNLYE0NRiWfCwU6kGtHce0iZAVihNup8Z-u0IbP-gHL-7fGp14AE"/>
+<img alt="Mastercard" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPCbcffEHakf2OlhaSagtM-5ZwgMzwI7cGR83QFjLkUas0LKgGrKO7uKkBsYGO98AX-2eIrvN7HhxaAUzxa3B8GELHrJj3QRTO8pFD5gq_0XkobzLyqzLhJgemlfc16INp0OsdSx7Zx502QKOLz0i7G2fGbaaJ3jCbuxjV8WbOtIFmaVoyux2ejfkMY2vt9K5dOnE8sG_kXGoB1lm0sK5Hkf4HpeF7PBaPcngVcKadYK_hbqxFcS6JcIIIlAWoD-W9dAcNAOP9w6s"/>
+<img alt="PayPal" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUDb5Lt18_eoAcLKKKV2lIHs6SjY3oyMX9eaj9pe3l9O2u092gl1epnNR77iOQS-km2hiFBIOMJ2atYABkcn4UaOP_j6K_mUWfcZJbyRmxwxV8-qU1fhP2g_5JCErJ-UO8omOMMOIRmuG5qL-jcgCrTgyxkkSHQE3KBlx5cKx85JlT6pUkdXFy36TxI8PfV2oKLSU9OMyTMg7MQvmTHMdpuvtPNDK3T8-8zUeMY9p9UGwMkWKUk3mZ0Q_vu-vJQD7iBm053mbbVe0"/>
+<img alt="Skrill" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2waZGOCgaoIDPW5RCrtLxL0uyfX7xwtJTcoEapzG9G0xUbVNe7wFzdduugI1EIBpC_NsGuq46uFAhmRRJ3NBxnylpSxjdH0_Bi-eG_pWpaN25EnMHBWVnhCS19G4_xXW3VPPPfJ3SEfEfHQ6vkBYbqqfr7MX_BoLQ9p9wrOB--6ScbnDb7A3_FBUrBUNMwRIUl-WyqMjJHzv7g7ZL4vswYCXY452jlhQoz9SRiovchHFaZMzLBX0XdfwfsbePbdpAAQwNFvwcXHY"/>
+<img alt="Maestro" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMpr-DqyWCH8cWO2XCRS29TNKi-XbI9tupgbruOWC9AgBzvC-wtQFmfsMQmNNNG7Aw1IirzsiJDcRXAqQs-Oc5d9iYvH6k_3oFuygSRCtUjeorjqdmw3kCFGxhBNSAzB9TPgPN5O50eeD-iP_R6jliyOkLecMvpwPurzGYnOvPcRfU8GXRoaksZn2zh_WKevl4G82pUTq66NRzxh9ffVmcd6rJRjuU_FJdMm7m-Tk9z9pYUktOcuWwLy8wjlER5UvplHnorxG0cM"/>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<script>
+  const reviews = [
+    'Beautiful flowers and fast delivery. The bouquet looked exactly like the pictures on the website.',
+    'Very good customer service. The flowers were fresh and lasted for many days.',
+    'Easy-to-use website with affordable prices. Perfect for birthday surprises.',
+    'I ordered flowers for my friend, and she loved them. The packaging was neat and elegant.',
+    'Same-day delivery was super helpful. Highly recommended for special occasions.'
+  ];
+
+  const reviewText = document.getElementById('reviewText');
+  const prevReview = document.getElementById('prevReview');
+  const nextReview = document.getElementById('nextReview');
+  let currentReview = 0;
+
+  function showReview(index) {
+    currentReview = (index + reviews.length) % reviews.length;
+    reviewText.textContent = `“${reviews[currentReview]}”`;
+  }
+
+  prevReview.addEventListener('click', () => showReview(currentReview - 1));
+  nextReview.addEventListener('click', () => showReview(currentReview + 1));
+</script>
+</body></html>
